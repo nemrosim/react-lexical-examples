@@ -5,6 +5,8 @@ import {ContentEditable} from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import {CustomHistoryActions} from "./components";
+import {OnChangePlugin} from "./components";
+import initialState from './initialState.json';
 
 export const App: React.FC = () => {
 
@@ -35,23 +37,26 @@ export const App: React.FC = () => {
         namespace: 'My Rich Text Editor',
         onError: (e) => {
             console.log('ERROR:', e)
-        }
+        },
+        editorState: JSON.stringify(initialState),
     }
 
     return (
         <div style={{padding: '20px'}}>
-            <LexicalComposer initialConfig={lexicalConfig}>
+            <LexicalComposer
+                initialConfig={lexicalConfig}
+            >
                 <PlainTextPlugin
                     contentEditable={CustomContent}
                     placeholder={CustomPlaceholder}
                     ErrorBoundary={LexicalErrorBoundary}
                 />
                 <HistoryPlugin/>
+                <OnChangePlugin/>
                 <div style={{margin: '20px 0px'}}>
                     <CustomHistoryActions/>
                 </div>
             </LexicalComposer>
-
         </div>
     );
 }
