@@ -1,11 +1,14 @@
 import React, {useMemo} from 'react';
 import {InitialConfigType, LexicalComposer} from '@lexical/react/LexicalComposer';
-import {PlainTextPlugin} from "@lexical/react/LexicalPlainTextPlugin";
+import {RichTextPlugin} from "@lexical/react/LexicalRichTextPlugin";
 import {ContentEditable} from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
-import {CustomHistoryActions} from "./components";
-import {OnChangePlugin} from "./components";
+import {
+    OnChangePlugin,
+    CustomTextActions,
+    CustomHistoryActions
+} from "./components";
 import initialState from './initialState.json';
 
 export const App: React.FC = () => {
@@ -26,7 +29,7 @@ export const App: React.FC = () => {
     const CustomPlaceholder = useMemo(() => {
         return (
             <div style={{
-                position: 'absolute', top: 30, left: 30,
+                position: 'absolute', top: 31, left: 35, color: '#ffffff'
             }}>
                 Enter some text...
             </div>
@@ -46,7 +49,7 @@ export const App: React.FC = () => {
             <LexicalComposer
                 initialConfig={lexicalConfig}
             >
-                <PlainTextPlugin
+                <RichTextPlugin
                     contentEditable={CustomContent}
                     placeholder={CustomPlaceholder}
                     ErrorBoundary={LexicalErrorBoundary}
@@ -55,6 +58,7 @@ export const App: React.FC = () => {
                 <OnChangePlugin/>
                 <div style={{margin: '20px 0px'}}>
                     <CustomHistoryActions/>
+                    <CustomTextActions/>
                 </div>
             </LexicalComposer>
         </div>

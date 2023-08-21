@@ -1,1 +1,38 @@
+.text-bold {
+    font-weight: bold;
+}
 
+.text-italic {
+    font-style: italic;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+.text-code {
+    background-color: #f0f2f5;
+    padding: 1px 0.25rem;
+    font-family: Menlo, Consolas, Monaco, monospace;
+    font-size: 94%;
+}
+
+.text-highlight {
+    margin: 0 5px;
+}
+
+.text-strikethrough {
+    text-decoration: line-through;
+}
+
+.text-subscript {
+    vertical-align: sub ;
+}
+
+.text-superscript {
+    vertical-align: super ;
+}
+
+p {
+    margin: 0;
+}
