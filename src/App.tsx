@@ -10,6 +10,7 @@ import {
     CustomHistoryActions
 } from "./components";
 import initialState from './initialState.json';
+import './App.css'
 
 export const App: React.FC = () => {
 
@@ -38,6 +39,18 @@ export const App: React.FC = () => {
 
     const lexicalConfig: InitialConfigType = {
         namespace: 'My Rich Text Editor',
+        theme: {
+            text: {
+                bold: "text-bold",
+                italic: "text-italic",
+                underline: "text-underline",
+                code: 'text-code',
+                highlight: 'text-highlight',
+                strikethrough: 'text-strikethrough',
+                subscript: 'text-subscript',
+                superscript: 'text-superscript',
+            },
+        },
         onError: (e) => {
             console.log('ERROR:', e)
         },
