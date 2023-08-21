@@ -3,6 +3,8 @@ import {InitialConfigType, LexicalComposer} from '@lexical/react/LexicalComposer
 import {PlainTextPlugin} from "@lexical/react/LexicalPlainTextPlugin";
 import {ContentEditable} from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
+import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
+import {CustomHistoryActions} from "./components";
 
 export const App: React.FC = () => {
 
@@ -44,7 +46,12 @@ export const App: React.FC = () => {
                     placeholder={CustomPlaceholder}
                     ErrorBoundary={LexicalErrorBoundary}
                 />
+                <HistoryPlugin/>
+                <div style={{margin: '20px 0px'}}>
+                    <CustomHistoryActions/>
+                </div>
             </LexicalComposer>
+
         </div>
     );
 }
