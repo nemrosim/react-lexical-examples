@@ -2,6 +2,9 @@ import {
     EditorConfig,
     ElementNode,
     LexicalEditor,
+    $createParagraphNode,
+    LexicalNode,
+    RangeSelection,
     SerializedElementNode,
     Spread,
 } from "lexical";
@@ -38,6 +41,34 @@ export class BannerNode extends ElementNode {
         _config: EditorConfig,
     ): boolean {
         return false;
+    }
+
+    /**
+     * Node should be set to paragraph when user delete all content
+     */
+    collapseAtStart(_: RangeSelection): boolean {
+        const paragraph = $createParagraphNode();
+        const children = this.getChildren();
+        children.forEach((child) => paragraph.append(child));
+        this.replace(paragraph);
+
+        return true;
+    }
+
+    /**
+     * Node should be set to paragraph when user press Enter.
+     * Node will remain the same on Shift+Enter
+     */
+    insertNewAfter(
+        _: RangeSelection,
+        restoreSelection?: boolean,
+    ): LexicalNode | null {
+        const paragraph = $createParagraphNode();
+        const direction = this.getDirection();
+        paragraph.setDirection(direction);
+        this.insertAfter(paragraph, restoreSelection);
+
+        return paragraph;
     }
 
     exportJSON(): SerializedBannerNode {
