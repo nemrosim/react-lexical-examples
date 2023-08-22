@@ -34,10 +34,10 @@
 }
 
 .banner {
-    border-left: 3px coral solid;
+    border-left: 4px coral solid;
     background-color: lightskyblue;
-    border-radius: 3px;
-    padding: 10px 0;
+    border-radius: 4px;
+    padding: 8px 4px;
 }
 
 p {
