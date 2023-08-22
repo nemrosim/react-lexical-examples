@@ -8,8 +8,11 @@ import {
     OnChangePlugin,
     CustomTextActions,
     CustomHistoryActions,
-    CustomAlignActions, CustomHeadingActions
+    CustomAlignActions,
+    CustomHeadingActions,
+    CustomHeadingPlugin,
 } from "./components";
+import {HeadingNode} from "@lexical/rich-text";
 import initialState from './initialState.json';
 import './App.css'
 
@@ -40,6 +43,7 @@ export const App: React.FC = () => {
 
     const lexicalConfig: InitialConfigType = {
         namespace: 'My Rich Text Editor',
+        nodes: [HeadingNode],
         theme: {
             text: {
                 bold: "text-bold",
@@ -70,7 +74,7 @@ export const App: React.FC = () => {
                 />
                 <HistoryPlugin/>
                 <OnChangePlugin/>
-
+                <CustomHeadingPlugin/>
                 <div style={{margin: '20px 0px'}}>
                     <CustomHistoryActions/>
                     <CustomHeadingActions/>
