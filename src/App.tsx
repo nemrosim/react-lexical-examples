@@ -11,10 +11,13 @@ import {
     CustomAlignActions,
     CustomHeadingActions,
     CustomHeadingPlugin,
+    CustomBannerPlugin,
+    CustomBannerActions,
 } from "./components";
 import {HeadingNode} from "@lexical/rich-text";
 import initialState from './initialState.json';
 import './App.css'
+import {BannerNode} from "./nodes";
 
 export const App: React.FC = () => {
 
@@ -43,7 +46,10 @@ export const App: React.FC = () => {
 
     const lexicalConfig: InitialConfigType = {
         namespace: 'My Rich Text Editor',
-        nodes: [HeadingNode],
+        nodes: [
+            BannerNode,
+            HeadingNode
+        ],
         theme: {
             text: {
                 bold: "text-bold",
@@ -55,6 +61,7 @@ export const App: React.FC = () => {
                 subscript: 'text-subscript',
                 superscript: 'text-superscript',
             },
+            banner: 'banner'
         },
         onError: (e) => {
             console.log('ERROR:', e)
@@ -75,8 +82,10 @@ export const App: React.FC = () => {
                 <HistoryPlugin/>
                 <OnChangePlugin/>
                 <CustomHeadingPlugin/>
+                <CustomBannerPlugin/>
                 <div style={{margin: '20px 0px'}}>
                     <CustomHistoryActions/>
+                    <CustomBannerActions/>
                     <CustomHeadingActions/>
                     <CustomTextActions/>
                     <CustomAlignActions/>
