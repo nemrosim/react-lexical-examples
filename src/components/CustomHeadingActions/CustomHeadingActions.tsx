@@ -20,7 +20,7 @@ export const CustomHeadingActions = () => {
 
     return (
         <div style={{marginTop: '10px'}}>
-            <span style={{fontWeight: 'bold'}}>Align actions</span>
+            <span style={{fontWeight: 'bold'}}>Heading actions</span>
             <div>
                 {(["h1", "h2", "h3", "h4", "h5"] as Array<HeadingTagType>).map((tag) => {
                     return (
