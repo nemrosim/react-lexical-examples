@@ -7,7 +7,8 @@ import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import {
     OnChangePlugin,
     CustomTextActions,
-    CustomHistoryActions
+    CustomHistoryActions,
+    CustomAlignActions, CustomHeadingActions
 } from "./components";
 import initialState from './initialState.json';
 import './App.css'
@@ -69,9 +70,12 @@ export const App: React.FC = () => {
                 />
                 <HistoryPlugin/>
                 <OnChangePlugin/>
+
                 <div style={{margin: '20px 0px'}}>
                     <CustomHistoryActions/>
+                    <CustomHeadingActions/>
                     <CustomTextActions/>
+                    <CustomAlignActions/>
                 </div>
             </LexicalComposer>
         </div>
