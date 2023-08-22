@@ -1,7 +1,9 @@
 import {
     useLexicalComposerContext
 } from "@lexical/react/LexicalComposerContext";
-import {HeadingTagType} from "@lexical/rich-text";
+import {$getSelection, $isRangeSelection} from "lexical";
+import { $setBlocksType } from "@lexical/selection";
+import {HeadingTagType, $createHeadingNode } from "@lexical/rich-text";
 
 export const CustomHeadingActions = () => {
     const [editor] = useLexicalComposerContext();
@@ -9,7 +11,10 @@ export const CustomHeadingActions = () => {
     const handleOnClick =
         (tag: HeadingTagType) => {
             editor.update(() => {
-                // Do something
+                const selection = $getSelection();
+                if ($isRangeSelection(selection)) {
+                    $setBlocksType(selection, () => $createHeadingNode(tag));
+                }
             });
         };
 
