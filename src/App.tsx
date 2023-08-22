@@ -16,8 +16,9 @@ import {
 } from "./components";
 import {HeadingNode} from "@lexical/rich-text";
 import initialState from './initialState.json';
-import './App.css'
 import {BannerNode} from "./nodes";
+
+import './App.css'
 
 export const App: React.FC = () => {
 

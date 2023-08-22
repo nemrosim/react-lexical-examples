@@ -71,6 +71,10 @@ export class BannerNode extends ElementNode {
         return paragraph;
     }
 
+    static importJSON(_: SerializedBannerNode): BannerNode {
+        return new BannerNode();
+    }
+
     exportJSON(): SerializedBannerNode {
         return {
             type: "banner",
