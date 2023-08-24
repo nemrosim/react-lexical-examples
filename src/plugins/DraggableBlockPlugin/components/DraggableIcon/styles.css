@@ -1,0 +1,25 @@
+.draggable-block-menu {
+    border-radius: 4px;
+    padding: 2px 1px;
+    cursor: grab;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20000;
+}
+
+.draggable-block-menu .icon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.3;
+    background-image: url(../../../../../public/assets/icons/draggable-block-menu.svg);
+}
+
+.draggable-block-menu:active {
+    cursor: grabbing;
+}
+
+.draggable-block-menu:hover {
+    background-color: #efefef;
+}
+

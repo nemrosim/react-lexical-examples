@@ -1,0 +1,8 @@
+.draggable-block-target-line {
+    pointer-events: none;
+    background: deepskyblue;
+    height: 5px;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+}
