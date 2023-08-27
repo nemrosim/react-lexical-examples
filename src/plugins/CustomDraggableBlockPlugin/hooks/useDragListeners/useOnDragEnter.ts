@@ -12,10 +12,6 @@ export const useOnDragEnter = () => {
          // Without this drop will not work;
          event.preventDefault();
 
-         /*
-            NOTE: Don't use event.target
-            because dragEnter will be triggered on a children too
-         */
          const target = event.currentTarget;
 
          if (!isInstanceOfHTMLElement(target)) {
@@ -26,7 +22,6 @@ export const useOnDragEnter = () => {
          // Use value that we set before.
          const key = target.getAttribute(DRAGGABLE_KEY);
 
-         //
          if (!key) {
             return false;
          } else {

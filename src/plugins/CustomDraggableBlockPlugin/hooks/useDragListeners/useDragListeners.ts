@@ -35,7 +35,6 @@ export const useDragListeners = () => {
    useEffect(() => {
       const addListeners = () => {
          keys.forEach((key) => {
-            // 1. We need to set listener only to nodes
             const htmlElement = editor.getElementByKey(key);
 
             if (!htmlElement) {
