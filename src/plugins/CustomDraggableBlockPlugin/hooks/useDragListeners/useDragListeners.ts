@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { draggableStore } from '../../store';
 import { DRAGGABLE_KEY } from '../../constants';
 import { useEditorKeys } from './useEditorKeys';
-import { $getNodeByKey, $getRoot, COMMAND_PRIORITY_LOW, DRAGOVER_COMMAND } from 'lexical';
+import { COMMAND_PRIORITY_LOW, DRAGOVER_COMMAND } from 'lexical';
 import { isInstanceOfHTMLElement } from '../../utils';
 import './useDragListeners.css';
 
