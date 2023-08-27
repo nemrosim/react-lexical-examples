@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { InitialConfigType, LexicalComposer } from '@lexical/react/LexicalComposer';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
@@ -17,32 +17,14 @@ import {
 import { HeadingNode } from '@lexical/rich-text';
 import initialState from './initialState.json';
 import { BannerNode } from './nodes';
+import { CustomDraggableBlockPlugin } from './plugins';
 
 import './App.css';
-import { DraggableBlockPlugin } from './plugins';
 
 export const App: React.FC = () => {
-   const [editableContainerHtmlElement, setEditableContainerHtmlElement] =
-      useState<HTMLElement | null>(null);
-
-   const onRef = (divElement: HTMLDivElement) => {
-      if (divElement !== null) {
-         setEditableContainerHtmlElement(divElement);
-      }
-   };
-
    const CustomContent = useMemo(() => {
       return (
-         <div
-            style={{
-               flex: 'auto',
-               position: 'relative',
-               resize: 'vertical',
-               backgroundColor: 'rgba(178,178,178,0.4)',
-               maxWidth: '100%',
-            }}
-            ref={onRef}
-         >
+         <div style={{ position: 'relative' }}>
             <ContentEditable />
          </div>
       );
@@ -52,10 +34,12 @@ export const App: React.FC = () => {
       return (
          <div
             style={{
-               position: 'absolute',
-               top: 31,
-               left: 35,
-               color: '#ffffff',
+               position: 'relative',
+               top: -19,
+               left: 30,
+               color: 'rgba(0,0,0,0.42)',
+               zIndex: -10,
+               pointerEvents: 'none',
             }}
          >
             Enter some text...
@@ -66,7 +50,9 @@ export const App: React.FC = () => {
    const lexicalConfig: InitialConfigType = {
       namespace: 'My Rich Text Editor',
       nodes: [BannerNode, HeadingNode],
+      editable: true,
       theme: {
+         root: 'root',
          text: {
             bold: 'text-bold',
             italic: 'text-italic',
@@ -92,20 +78,6 @@ export const App: React.FC = () => {
          }}
       >
          <LexicalComposer initialConfig={lexicalConfig}>
-            <RichTextPlugin
-               contentEditable={CustomContent}
-               placeholder={CustomPlaceholder}
-               ErrorBoundary={LexicalErrorBoundary}
-            />
-            <HistoryPlugin />
-            <OnChangePlugin />
-            <CustomHeadingPlugin />
-            <CustomBannerPlugin />
-            <>
-               {editableContainerHtmlElement ? (
-                  <DraggableBlockPlugin anchorElem={editableContainerHtmlElement} />
-               ) : null}
-            </>
             <div
                style={{
                   margin: '20px 0px',
@@ -117,6 +89,16 @@ export const App: React.FC = () => {
                <CustomTextActions />
                <CustomAlignActions />
             </div>
+            <RichTextPlugin
+               contentEditable={CustomContent}
+               placeholder={CustomPlaceholder}
+               ErrorBoundary={LexicalErrorBoundary}
+            />
+            <HistoryPlugin />
+            <OnChangePlugin />
+            <CustomHeadingPlugin />
+            <CustomBannerPlugin />
+            <CustomDraggableBlockPlugin />
          </LexicalComposer>
       </div>
    );

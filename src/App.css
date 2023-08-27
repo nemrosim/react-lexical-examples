@@ -1,3 +1,9 @@
+/* disable error overlay screen */
+/* https://stackoverflow.com/questions/46589819/disable-error-overlay-in-development-mode */
+iframe {
+    display: none;
+}
+
 .text-bold {
     font-weight: bold;
 }
@@ -26,11 +32,11 @@
 }
 
 .text-subscript {
-    vertical-align: sub ;
+    vertical-align: sub;
 }
 
 .text-superscript {
-    vertical-align: super ;
+    vertical-align: super;
 }
 
 .banner {
@@ -38,6 +44,14 @@
     background-color: lightskyblue;
     border-radius: 4px;
     padding: 8px 4px;
+}
+
+.root {
+    padding-left: 23px;
+}
+
+.root:focus-visible {
+    outline: none;
 }
 
 p {

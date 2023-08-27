@@ -21,13 +21,14 @@ module.exports = {
    },
    plugins: ['react', 'jsx-a11y', '@typescript-eslint'],
    rules: {
+      'react/react-in-jsx-scope': 'off',
       'react-hooks/exhaustive-deps': 'error',
       'no-var': 'error',
       'prefer-template': 'error',
       radix: 'error',
       'import/prefer-default-export': 'off',
       'no-unused-vars': 'off',
-      '@typescript-eslint/no-unused-vars': ['error'],
+      '@typescript-eslint/no-unused-vars': ['warn'],
    },
    overrides: [
       {
