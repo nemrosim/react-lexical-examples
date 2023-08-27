@@ -1,7 +1,7 @@
 import React, { DragEvent as ReactDragEvent, useCallback } from 'react';
-import { useDraggableStore } from './store';
+import { useDraggableStore } from '../store';
 
-import './style.css';
+import '../CustomDraggableBlockPlugin.css';
 
 const DraggableBlock: React.FC = () => {
    const { draggable, resetState } = useDraggableStore();

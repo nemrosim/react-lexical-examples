@@ -1,11 +1,11 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useOnDragEnter } from './useOnDragEnter';
 import { useEffect } from 'react';
-import { draggableStore } from './store';
-import { DRAGGABLE_KEY } from './constants';
+import { draggableStore } from '../store';
+import { DRAGGABLE_KEY } from '../constants';
 import { useEditorKeys } from './useEditorKeys';
 import { COMMAND_PRIORITY_LOW, DRAGOVER_COMMAND } from 'lexical';
-import { isInstanceOfHTMLElement } from './utils';
+import { isInstanceOfHTMLElement } from '../utils';
 
 const setDraggableElement = ({ target }: MouseEvent) => {
    if (!isInstanceOfHTMLElement(target)) {

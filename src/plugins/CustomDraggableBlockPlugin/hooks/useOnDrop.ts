@@ -1,8 +1,8 @@
 import { $getNodeByKey, COMMAND_PRIORITY_HIGH, DROP_COMMAND } from 'lexical';
 import { useCallback, useEffect } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { draggableStore } from './store';
-import { DRAGGABLE_KEY } from './constants';
+import { draggableStore } from '../store';
+import { DRAGGABLE_KEY } from '../constants';
 
 export const useOnDrop = () => {
    const [editor] = useLexicalComposerContext();

@@ -1,11 +1,10 @@
 import React from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { DraggableBlock } from './DraggableBlock';
-import { DraggableLine } from './DraggableLine';
-import { useOnDrop } from './useOnDrop';
-import { useListeners } from './useListeners';
+import { DraggableBlock } from './components/DraggableBlock';
+import { DraggableLine } from './components/DraggableLine';
+import { useOnDrop, useListeners } from './hooks';
 
-import './style.css';
+import './CustomDraggableBlockPlugin.css';
 
 export const CustomDraggableBlockPlugin: React.FC = () => {
    const [editor] = useLexicalComposerContext();

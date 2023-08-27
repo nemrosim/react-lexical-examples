@@ -1,6 +1,6 @@
 import React from 'react';
-import { useDraggableLineStore } from './store';
-import './style.css';
+import { useDraggableLineStore } from '../store';
+import '../CustomDraggableBlockPlugin.css';
 
 const DraggableLine: React.FC = () => {
    const { line } = useDraggableLineStore();
