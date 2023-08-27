@@ -1,7 +1,7 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { useOnDragEnter } from './useOnDragEnter';
 import { useEffect } from 'react';
-import { draggableStore } from './store/draggableStore';
+import { draggableStore } from './store';
 import { DRAGGABLE_KEY } from './constants';
 import { useEditorKeys } from './useEditorKeys';
 import { COMMAND_PRIORITY_LOW, DRAGOVER_COMMAND } from 'lexical';

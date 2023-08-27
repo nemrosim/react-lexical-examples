@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDraggableLineStore } from './store/draggableStore';
+import { useDraggableLineStore } from './store';
 import './style.css';
 
 const DraggableLine: React.FC = () => {

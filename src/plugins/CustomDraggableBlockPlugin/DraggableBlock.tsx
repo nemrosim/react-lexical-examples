@@ -1,5 +1,5 @@
 import React, { DragEvent as ReactDragEvent, useCallback } from 'react';
-import { useDraggableStore } from './store/draggableStore';
+import { useDraggableStore } from './store';
 
 import './style.css';
 

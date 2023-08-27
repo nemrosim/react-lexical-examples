@@ -1,4 +1,4 @@
-import { draggableStore } from './store/draggableStore';
+import { draggableStore } from './store';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { DRAGGABLE_KEY } from './constants';
 import { useCallback } from 'react';
