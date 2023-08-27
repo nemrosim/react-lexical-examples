@@ -16,7 +16,7 @@ import {
 } from './components';
 import { HeadingNode } from '@lexical/rich-text';
 import initialState from './initialState.json';
-import { BannerNode } from './nodes';
+import { BannerNode, ImageNode } from './nodes';
 import { CustomDraggableBlockPlugin, DraggableWrapper } from './plugins';
 
 import './App.css';
@@ -51,7 +51,7 @@ export const App: React.FC = () => {
 
    const lexicalConfig: InitialConfigType = {
       namespace: 'My Rich Text Editor',
-      nodes: [BannerNode, HeadingNode],
+      nodes: [BannerNode, HeadingNode, ImageNode],
       editable: true,
       theme: {
          root: 'root',
