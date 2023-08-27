@@ -17,16 +17,18 @@ import {
 import { HeadingNode } from '@lexical/rich-text';
 import initialState from './initialState.json';
 import { BannerNode } from './nodes';
-import { CustomDraggableBlockPlugin } from './plugins';
+import { CustomDraggableBlockPlugin, DraggableWrapper } from './plugins';
 
 import './App.css';
 
 export const App: React.FC = () => {
    const CustomContent = useMemo(() => {
       return (
-         <div style={{ position: 'relative' }}>
-            <ContentEditable />
-         </div>
+         <DraggableWrapper>
+            <div style={{ position: 'relative' }}>
+               <ContentEditable />
+            </div>
+         </DraggableWrapper>
       );
    }, []);
 
