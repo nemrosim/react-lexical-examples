@@ -1,8 +1,8 @@
-import { draggableStore } from '../store';
+import { draggableStore } from '../../store';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { DRAGGABLE_KEY } from '../constants';
+import { DRAGGABLE_KEY } from '../../constants';
 import { useCallback } from 'react';
-import { isInstanceOfHTMLElement } from '../utils';
+import { isInstanceOfHTMLElement } from '../../utils';
 
 export const useOnDragEnter = () => {
    const [editor] = useLexicalComposerContext();

@@ -1,0 +1,17 @@
+.draggable-element {
+    position: absolute;
+    border-radius: 5px;
+    width: 15px;
+    height: 40px;
+    background-color: #006fff;
+    cursor: grab;
+    transition: background-color 150ms linear;
+}
+
+.draggable-element:active {
+    cursor: grabbing;
+}
+
+.draggable-element:hover {
+    background-color: #074aab;
+}

@@ -1,0 +1,10 @@
+.on-drag-line {
+    position: absolute;
+    border-radius: 5px;
+    width: 20px;
+    height: 3px;
+    background-color: #3778d9;
+    pointer-events: none;
+    z-Index: 20000;
+}
+

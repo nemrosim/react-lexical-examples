@@ -1,9 +1,9 @@
 import React, { DragEvent as ReactDragEvent, useCallback } from 'react';
 import { useDraggableStore } from '../store';
 
-import '../CustomDraggableBlockPlugin.css';
+import './DraggableElement.css';
 
-const DraggableBlock: React.FC = () => {
+const DraggableElement: React.FC = () => {
    const { draggable, resetState } = useDraggableStore();
 
    const handleOnDragStart = useCallback(
@@ -29,7 +29,7 @@ const DraggableBlock: React.FC = () => {
          // THIS IS VERY IMPORTANT!!!
          // Without is element will need to be dragged twice;
          draggable={true}
-         className="draggable"
+         className="draggable-element"
          onDragStart={handleOnDragStart}
          onDragEnd={resetState}
          style={{
@@ -41,6 +41,6 @@ const DraggableBlock: React.FC = () => {
    );
 };
 
-const Memoized = React.memo(DraggableBlock, () => true);
+const Memoized = React.memo(DraggableElement, () => true);
 
-export { Memoized as DraggableBlock };
+export { Memoized as DraggableElement };

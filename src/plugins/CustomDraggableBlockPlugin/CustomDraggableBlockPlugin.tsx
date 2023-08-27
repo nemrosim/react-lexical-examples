@@ -1,15 +1,13 @@
 import React from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { DraggableBlock } from './components/DraggableBlock';
-import { DraggableLine } from './components/DraggableLine';
-import { useOnDrop, useListeners } from './hooks';
-
-import './CustomDraggableBlockPlugin.css';
+import { DraggableElement, OnDragLine } from './components';
+import { useOnDrop, useDragListeners } from './hooks';
 
 export const CustomDraggableBlockPlugin: React.FC = () => {
    const [editor] = useLexicalComposerContext();
+
+   useDragListeners();
    useOnDrop();
-   useListeners();
 
    const isEditable = editor.isEditable();
 
@@ -19,8 +17,8 @@ export const CustomDraggableBlockPlugin: React.FC = () => {
 
    return (
       <>
-         <DraggableBlock />
-         <DraggableLine />
+         <DraggableElement />
+         <OnDragLine />
       </>
    );
 };

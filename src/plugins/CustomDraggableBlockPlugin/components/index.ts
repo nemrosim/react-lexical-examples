@@ -1,2 +1,2 @@
-export * from './DraggableBlock';
+export * from './DraggableElement';
 export * from './DraggableLine';

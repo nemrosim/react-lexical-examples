@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDraggableLineStore } from '../store';
-import '../CustomDraggableBlockPlugin.css';
+import './DraggableLine.css';
 
-const DraggableLine: React.FC = () => {
+const OnDragLine: React.FC = () => {
    const { line } = useDraggableLineStore();
 
    if (!line?.data) {
@@ -13,7 +13,7 @@ const DraggableLine: React.FC = () => {
 
    return (
       <div
-         className="line"
+         className="on-drag-line"
          style={{
             top: line.data.top + line.data.height - scrollOffset,
             left: line.data.left,
@@ -23,6 +23,6 @@ const DraggableLine: React.FC = () => {
    );
 };
 
-const Memoized = React.memo(DraggableLine, () => true);
+const Memoized = React.memo(OnDragLine, () => true);
 
-export { Memoized as DraggableLine };
+export { Memoized as OnDragLine };
