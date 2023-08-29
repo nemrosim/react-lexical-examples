@@ -14,23 +14,30 @@ import {
    CustomBannerPlugin,
    CustomBannerActions,
 } from './components';
-import { HeadingNode } from '@lexical/rich-text';
+import { HeadingNode, QuoteNode } from '@lexical/rich-text';
+import { CodeNode } from '@lexical/code';
+import { ListItemNode, ListNode } from '@lexical/list';
+import { LinkNode } from '@lexical/link';
 import initialState from './initialState.json';
 import { BannerNode, ImageNode } from './nodes';
 import { CustomDraggableBlockPlugin, DraggableWrapper } from './plugins';
 
 import './App.css';
+import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
+import { APP_TRANSFORMERS, MarkdownActions } from './components/MarkdownActions';
+import { useDraggableStore } from './plugins/CustomDraggableBlockPlugin/store';
 
 export const App: React.FC = () => {
+   const { isMarkdown } = useDraggableStore();
    const CustomContent = useMemo(() => {
       return (
          <DraggableWrapper>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', paddingLeft: isMarkdown ? undefined : '23px' }}>
                <ContentEditable />
             </div>
          </DraggableWrapper>
       );
-   }, []);
+   }, [isMarkdown]);
 
    const CustomPlaceholder = useMemo(() => {
       return (
@@ -51,7 +58,16 @@ export const App: React.FC = () => {
 
    const lexicalConfig: InitialConfigType = {
       namespace: 'My Rich Text Editor',
-      nodes: [BannerNode, HeadingNode, ImageNode],
+      nodes: [
+         BannerNode,
+         HeadingNode,
+         ImageNode,
+         QuoteNode,
+         CodeNode,
+         ListNode,
+         ListItemNode,
+         LinkNode,
+      ],
       editable: true,
       theme: {
          root: 'root',
@@ -66,6 +82,7 @@ export const App: React.FC = () => {
             superscript: 'text-superscript',
          },
          banner: 'banner',
+         code: 'markdown-code',
       },
       onError: (e) => {
          console.log('ERROR:', e);
@@ -90,6 +107,7 @@ export const App: React.FC = () => {
                <CustomHeadingActions />
                <CustomTextActions />
                <CustomAlignActions />
+               <MarkdownActions />
             </div>
             <RichTextPlugin
                contentEditable={CustomContent}
@@ -98,6 +116,7 @@ export const App: React.FC = () => {
             />
             <HistoryPlugin />
             <OnChangePlugin />
+            <MarkdownShortcutPlugin transformers={APP_TRANSFORMERS} />
             <CustomHeadingPlugin />
             <CustomBannerPlugin />
             <CustomDraggableBlockPlugin />

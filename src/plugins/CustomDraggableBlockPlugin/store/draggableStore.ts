@@ -27,6 +27,8 @@ interface MiniLibraryStoreProps {
    line?: Line;
    setLine: (value: Line) => void;
    resetState: () => void;
+   isMarkdown: boolean;
+   setIsMarkdown: (value: boolean) => void;
 }
 
 export const draggableStore = create<MiniLibraryStoreProps, [['zustand/devtools', never]]>(
@@ -73,6 +75,16 @@ export const draggableStore = create<MiniLibraryStoreProps, [['zustand/devtools'
                { type: 'setLine', value: newLine },
             );
          },
+         isMarkdown: false,
+         setIsMarkdown: (value: boolean) => {
+            setState(
+               {
+                  isMarkdown: value,
+               },
+               false,
+               { type: 'setIsMarkdown', value },
+            );
+         },
       }),
       { name: 'draggableStore' },
    ),
@@ -80,9 +92,10 @@ export const draggableStore = create<MiniLibraryStoreProps, [['zustand/devtools'
 
 export const useDraggableStore = () =>
    draggableStore(
-      ({ draggable, resetState }) => ({
+      ({ draggable, resetState, isMarkdown }) => ({
          draggable,
          resetState,
+         isMarkdown,
       }),
       shallow,
    );
