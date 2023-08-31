@@ -22,21 +22,22 @@ import { CodeNode } from '@lexical/code';
 import { ListItemNode, ListNode } from '@lexical/list';
 import { LinkNode } from '@lexical/link';
 import { BannerNode, ImageNode } from './nodes';
-import { CustomDraggableBlockPlugin, DraggableWrapper } from './plugins';
+import { CustomDraggableBlockPlugin, DraggableWrapper, useDraggableStore } from './plugins';
 
 import initialState from './initialState.json';
 import './App.css';
 
 export const App: React.FC = () => {
+   const { isMarkdown } = useDraggableStore();
    const CustomContent = useMemo(() => {
       return (
          <DraggableWrapper>
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', paddingLeft: isMarkdown ? undefined : '23px' }}>
                <ContentEditable />
             </div>
          </DraggableWrapper>
       );
-   }, []);
+   }, [isMarkdown]);
 
    const CustomPlaceholder = useMemo(() => {
       return (

@@ -3,7 +3,7 @@ import { $createTextNode, $getRoot } from 'lexical';
 import { $createCodeNode, $isCodeNode } from '@lexical/code';
 import { $convertFromMarkdownString, $convertToMarkdownString } from '@lexical/markdown';
 import { TRANSFORMERS } from '@lexical/markdown';
-
+import { draggableStore } from '../../plugins';
 export const MarkdownActions = () => {
    const [editor] = useLexicalComposerContext();
 
@@ -15,11 +15,13 @@ export const MarkdownActions = () => {
             // console.log('Markdown -> Node');
 
             $convertFromMarkdownString(firstChild.getTextContent(), TRANSFORMERS);
+            draggableStore.getState().setIsMarkdown(false);
          } else {
             // console.log('Node -> Markdown');
 
             const markdown = $convertToMarkdownString(TRANSFORMERS);
             root.clear().append($createCodeNode('markdown').append($createTextNode(markdown)));
+            draggableStore.getState().setIsMarkdown(true);
          }
       });
    };
