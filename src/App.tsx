@@ -4,6 +4,8 @@ import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
+import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
+import { TRANSFORMERS } from '@lexical/markdown';
 import {
    OnChangePlugin,
    CustomTextActions,
@@ -14,11 +16,14 @@ import {
    CustomBannerPlugin,
    CustomBannerActions,
 } from './components';
-import { HeadingNode } from '@lexical/rich-text';
-import initialState from './initialState.json';
+import { HeadingNode, QuoteNode } from '@lexical/rich-text';
+import { CodeNode } from '@lexical/code';
+import { ListItemNode, ListNode } from '@lexical/list';
+import { LinkNode } from '@lexical/link';
 import { BannerNode, ImageNode } from './nodes';
 import { CustomDraggableBlockPlugin, DraggableWrapper } from './plugins';
 
+import initialState from './initialState.json';
 import './App.css';
 
 export const App: React.FC = () => {
@@ -51,7 +56,16 @@ export const App: React.FC = () => {
 
    const lexicalConfig: InitialConfigType = {
       namespace: 'My Rich Text Editor',
-      nodes: [BannerNode, HeadingNode, ImageNode],
+      nodes: [
+         BannerNode,
+         HeadingNode,
+         ImageNode,
+         QuoteNode,
+         CodeNode,
+         ListNode,
+         ListItemNode,
+         LinkNode,
+      ],
       editable: true,
       theme: {
          root: 'root',
@@ -98,6 +112,7 @@ export const App: React.FC = () => {
             />
             <HistoryPlugin />
             <OnChangePlugin />
+            <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
             <CustomHeadingPlugin />
             <CustomBannerPlugin />
             <CustomDraggableBlockPlugin />
