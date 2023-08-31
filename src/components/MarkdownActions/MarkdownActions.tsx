@@ -4,6 +4,10 @@ import { $createCodeNode, $isCodeNode } from '@lexical/code';
 import { $convertFromMarkdownString, $convertToMarkdownString } from '@lexical/markdown';
 import { TRANSFORMERS } from '@lexical/markdown';
 import { draggableStore } from '../../plugins';
+import { BANNER_TRANSFORMER } from '../../nodes';
+
+export const APP_TRANSFORMERS = [...TRANSFORMERS, BANNER_TRANSFORMER];
+
 export const MarkdownActions = () => {
    const [editor] = useLexicalComposerContext();
 
@@ -14,12 +18,12 @@ export const MarkdownActions = () => {
          if ($isCodeNode(firstChild) && firstChild.getLanguage() === 'markdown') {
             // console.log('Markdown -> Node');
 
-            $convertFromMarkdownString(firstChild.getTextContent(), TRANSFORMERS);
+            $convertFromMarkdownString(firstChild.getTextContent(), APP_TRANSFORMERS);
             draggableStore.getState().setIsMarkdown(false);
          } else {
             // console.log('Node -> Markdown');
 
-            const markdown = $convertToMarkdownString(TRANSFORMERS);
+            const markdown = $convertToMarkdownString(APP_TRANSFORMERS);
             root.clear().append($createCodeNode('markdown').append($createTextNode(markdown)));
             draggableStore.getState().setIsMarkdown(true);
          }
