@@ -34,4 +34,18 @@
 - Final touch
 - Image/s drop
 
+# [Part 3. Lexical. How To Use Markdown Plugin](https://medium.com/@artem-diashkin/lexical-how-to-use-markdown-plugin-5b4fd3719298)
+- Transformers
+- MarkdownShortcutPlugin
+- Disable draggable element on markdown mode
 
+# [Part 4. Lexical. How To Use Link Plugins.](https://artem-diashkin.medium.com/lexical-how-to-use-link-plugins-d9a7734977a0)
+
+![links.gif](links.gif)
+
+## Tutorial on how to use Lexical Link Plugins with React: LinkPlugin, AutoLinkPlugin, LexicalClickableLinkPlugin
+
+### What will be covered
+- `LinkPlugin` (wrap node with a link on link paste)
+- `AutoLinkPlugin` (automatically wrap with a link on text change)
+- `LexicalClickableLinkPlugin` (redirect by clicking on a link in edit mode)

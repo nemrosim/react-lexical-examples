@@ -20,9 +20,15 @@ import {
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { CodeNode } from '@lexical/code';
 import { ListItemNode, ListNode } from '@lexical/list';
-import { LinkNode } from '@lexical/link';
 import { BannerNode, ImageNode } from './nodes';
 import { CustomDraggableBlockPlugin, DraggableWrapper, useDraggableStore } from './plugins';
+
+// Link Plugins
+import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
+import { AutoLinkPlugin } from '@lexical/react/LexicalAutoLinkPlugin';
+import { AutoLinkNode, LinkNode } from '@lexical/link';
+import LexicalClickableLinkPlugin from '@lexical/react/LexicalClickableLinkPlugin';
+import { MATCHERS, validateUrl } from './utils';
 
 import initialState from './initialState.json';
 import './App.css';
@@ -67,6 +73,7 @@ export const App: React.FC = () => {
          ListNode,
          ListItemNode,
          LinkNode,
+         AutoLinkNode,
       ],
       editable: true,
       theme: {
@@ -116,6 +123,12 @@ export const App: React.FC = () => {
             />
             <HistoryPlugin />
             <OnChangePlugin />
+            {/* This will allow to wrap node with a pasted link*/}
+            <LinkPlugin validateUrl={validateUrl} />
+            {/* This will allow to automatically wrap with a link entered text */}
+            <AutoLinkPlugin matchers={MATCHERS} />
+            {/* This will allow to click on a link in edit mode */}
+            <LexicalClickableLinkPlugin />
             <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
             <CustomHeadingPlugin />
             <CustomBannerPlugin />
