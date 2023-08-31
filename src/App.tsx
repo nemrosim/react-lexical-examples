@@ -15,6 +15,7 @@ import {
    CustomHeadingPlugin,
    CustomBannerPlugin,
    CustomBannerActions,
+   MarkdownActions,
 } from './components';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { CodeNode } from '@lexical/code';
@@ -80,6 +81,7 @@ export const App: React.FC = () => {
             superscript: 'text-superscript',
          },
          banner: 'banner',
+         code: 'markdown-code',
       },
       onError: (e) => {
          console.log('ERROR:', e);
@@ -104,6 +106,7 @@ export const App: React.FC = () => {
                <CustomHeadingActions />
                <CustomTextActions />
                <CustomAlignActions />
+               <MarkdownActions />
             </div>
             <RichTextPlugin
                contentEditable={CustomContent}

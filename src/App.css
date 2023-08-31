@@ -54,6 +54,13 @@ iframe {
     outline: none;
 }
 
+.markdown-code {
+    font-size: 12px;
+    line-height: 1.5;
+    background-color: #dedede;
+    display: block;
+}
+
 p {
     margin: 0;
 }
