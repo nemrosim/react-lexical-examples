@@ -52,10 +52,13 @@
 - `AutoLinkPlugin` (automatically wrap with a link on text change)
 - `LexicalClickableLinkPlugin` (redirect by clicking on a link in edit mode)
 
-# [Part 5. Lexical - How To Add Node's Placeholder]()
+# [Part 5. Lexical - How To Add Node's Placeholder](https://artem-diashkin.medium.com/lexical-how-to-add-nodes-placeholder-notion-so-type-865d26829c72)
 
 ![placeholder.gif](placeholder.gif)
 
 ## Tutorial on how to add a placeholder to the Lexical's empty Node element.
 
 ### What will be covered
+- Register lexical update listener
+- Lexical children data and styles
+- Managing placeholder data
