@@ -35,6 +35,8 @@
 - Image/s drop
 
 # [Part 3. Lexical. How To Use Markdown Plugin](https://medium.com/@artem-diashkin/lexical-how-to-use-markdown-plugin-5b4fd3719298)
+
+### What will be covered:
 - Transformers
 - MarkdownShortcutPlugin
 - Disable draggable element on markdown mode
@@ -49,3 +51,11 @@
 - `LinkPlugin` (wrap node with a link on link paste)
 - `AutoLinkPlugin` (automatically wrap with a link on text change)
 - `LexicalClickableLinkPlugin` (redirect by clicking on a link in edit mode)
+
+# [Part 5. Lexical - How To Add Node's Placeholder]()
+
+![placeholder.gif](placeholder.gif)
+
+## Tutorial on how to add a placeholder to the Lexical's empty Node element.
+
+### What will be covered
