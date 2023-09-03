@@ -1,5 +1,7 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { FORMAT_TEXT_COMMAND, TextFormatType } from 'lexical';
+import { ActionsContainer } from '../ActionsContainer';
+import { ActionButton } from '../ActionButton';
 
 export const CustomTextActions = () => {
    const [editor] = useLexicalComposerContext();
@@ -9,29 +11,28 @@ export const CustomTextActions = () => {
    };
 
    return (
-      <div style={{ marginTop: '10px' }}>
-         <span style={{ fontWeight: 'bold' }}>Text actions</span>
-         <div>
-            {[
-               'Bold',
-               'Italic',
-               'Underline',
-               'Code',
-               'Highlight',
-               'Strikethrough',
-               'Subscript',
-               'Superscript',
-            ].map((value) => {
-               return (
-                  <button
-                     key={value}
-                     onClick={() => handleOnClick(value.toLowerCase() as TextFormatType)}
-                  >
-                     {value}
-                  </button>
-               );
-            })}
-         </div>
-      </div>
+      <ActionsContainer title="Text actions">
+         {[
+            'Bold',
+            'Italic',
+            'Underline',
+            'Code',
+            'Highlight',
+            'Strikethrough',
+            'Subscript',
+            'Superscript',
+         ].map((value) => {
+            return (
+               <ActionButton
+                  key={value}
+                  onClick={() =>
+                     handleOnClick(value.toLowerCase() as TextFormatType)
+                  }
+               >
+                  {value}
+               </ActionButton>
+            );
+         })}
+      </ActionsContainer>
    );
 };

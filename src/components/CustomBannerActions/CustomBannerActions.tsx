@@ -1,22 +1,19 @@
-import React from "react";
-import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
-import {INSERT_BANNER_COMMAND} from "../CustomBannerPlugin";
+import React from 'react';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { INSERT_BANNER_COMMAND } from '../../plugins';
+import { ActionsContainer } from '../ActionsContainer';
+import { ActionButton } from '../ActionButton';
 
 export const CustomBannerActions: React.FC = () => {
-    const [editor] = useLexicalComposerContext();
+   const [editor] = useLexicalComposerContext();
 
-    const handleOnClick = () => {
-        editor.dispatchCommand(INSERT_BANNER_COMMAND, undefined);
-    };
+   const handleOnClick = () => {
+      editor.dispatchCommand(INSERT_BANNER_COMMAND, undefined);
+   };
 
-    return (
-        <div style={{marginTop: '10px'}}>
-            <span style={{fontWeight: 'bold'}}>Heading actions</span>
-            <div>
-                <button onClick={handleOnClick}>
-                    Banner
-                </button>
-            </div>
-        </div>
-    );
+   return (
+      <ActionsContainer title="Banner action">
+         <ActionButton onClick={handleOnClick}>Banner</ActionButton>
+      </ActionsContainer>
+   );
 };

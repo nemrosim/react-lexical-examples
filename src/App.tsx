@@ -1,5 +1,8 @@
 import React, { useMemo } from 'react';
-import { InitialConfigType, LexicalComposer } from '@lexical/react/LexicalComposer';
+import {
+   InitialConfigType,
+   LexicalComposer,
+} from '@lexical/react/LexicalComposer';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
@@ -7,13 +10,10 @@ import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
 import { TRANSFORMERS } from '@lexical/markdown';
 import {
-   OnChangePlugin,
    CustomTextActions,
    CustomHistoryActions,
    CustomAlignActions,
    CustomHeadingActions,
-   CustomHeadingPlugin,
-   CustomBannerPlugin,
    CustomBannerActions,
    MarkdownActions,
 } from './components';
@@ -21,7 +21,16 @@ import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { CodeNode } from '@lexical/code';
 import { ListItemNode, ListNode } from '@lexical/list';
 import { BannerNode, ImageNode } from './nodes';
-import { CustomDraggableBlockPlugin, DraggableWrapper, useDraggableStore } from './plugins';
+import {
+   CustomDraggableBlockPlugin,
+   DraggableWrapper,
+   useDraggableStore,
+   CustomBannerPlugin,
+   CustomHeadingPlugin,
+   // TODO
+   CustomLexicalTypeaheadMenuPlugin,
+   CustomOnChangePlugin,
+} from './plugins';
 
 // Link Plugins
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
@@ -38,8 +47,14 @@ export const App: React.FC = () => {
    const CustomContent = useMemo(() => {
       return (
          <DraggableWrapper>
-            <div style={{ position: 'relative', paddingLeft: isMarkdown ? undefined : '23px' }}>
+            <div
+               style={{
+                  position: 'relative',
+                  paddingLeft: isMarkdown ? undefined : '23px',
+               }}
+            >
                <ContentEditable />
+               {/*<FloatingToolbar />*/}
             </div>
          </DraggableWrapper>
       );
@@ -51,7 +66,7 @@ export const App: React.FC = () => {
             style={{
                position: 'relative',
                top: -19,
-               left: 30,
+               left: 23,
                color: 'rgba(0,0,0,0.42)',
                zIndex: -10,
                pointerEvents: 'none',
@@ -94,7 +109,7 @@ export const App: React.FC = () => {
       onError: (e) => {
          console.log('ERROR:', e);
       },
-      editorState: JSON.stringify(initialState),
+      // editorState: JSON.stringify(initialState),
    };
 
    return (
@@ -109,12 +124,12 @@ export const App: React.FC = () => {
                   margin: '20px 0px',
                }}
             >
-               <CustomHistoryActions />
-               <CustomBannerActions />
+               {/*<CustomHistoryActions />*/}
+               {/*<CustomBannerActions />*/}
                <CustomHeadingActions />
-               <CustomTextActions />
-               <CustomAlignActions />
-               <MarkdownActions />
+               {/*<CustomTextActions />*/}
+               {/*<CustomAlignActions />*/}
+               {/*<MarkdownActions />*/}
             </div>
             <RichTextPlugin
                contentEditable={CustomContent}
@@ -122,13 +137,15 @@ export const App: React.FC = () => {
                ErrorBoundary={LexicalErrorBoundary}
             />
             <HistoryPlugin />
-            <OnChangePlugin />
+            <CustomOnChangePlugin />
             {/* This will allow to wrap node with a pasted link*/}
             <LinkPlugin validateUrl={validateUrl} />
             {/* This will allow to automatically wrap with a link entered text */}
             <AutoLinkPlugin matchers={MATCHERS} />
             {/* This will allow to click on a link in edit mode */}
             <LexicalClickableLinkPlugin />
+            {/* TODO: This will show a popover dialog on "/" (like Notion)*/}
+            {/*<CustomLexicalTypeaheadMenuPlugin />*/}
             <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
             <CustomHeadingPlugin />
             <CustomBannerPlugin />

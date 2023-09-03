@@ -1,3 +1,7 @@
+#root{
+    overflow: hidden;
+}
+
 /* disable error overlay screen */
 /* https://stackoverflow.com/questions/46589819/disable-error-overlay-in-development-mode */
 iframe {

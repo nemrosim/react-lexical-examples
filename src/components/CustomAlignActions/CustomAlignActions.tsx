@@ -5,35 +5,46 @@ import {
    OUTDENT_CONTENT_COMMAND,
    INDENT_CONTENT_COMMAND,
 } from 'lexical';
+import { ActionsContainer } from '../ActionsContainer';
+import { ActionButton } from '../ActionButton';
 
 export const CustomAlignActions = () => {
    const [editor] = useLexicalComposerContext();
 
-   const handleOnClick = (formatType: ElementFormatType) => {
-      editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, formatType);
-   };
+   const handleOnClick =
+      ({ formatType }: { formatType: ElementFormatType }) =>
+      () => {
+         editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, formatType);
+      };
 
    return (
-      <div style={{ marginTop: '10px' }}>
-         <span style={{ fontWeight: 'bold' }}>Heading actions</span>
-         <div>
-            {['Left', 'Center', 'Right', 'Justify'].map((value) => {
-               return (
-                  <button
-                     key={value}
-                     onClick={() => handleOnClick(value.toLowerCase() as ElementFormatType)}
-                  >
-                     {value}
-                  </button>
-               );
-            })}
-            <button onClick={() => editor.dispatchCommand(OUTDENT_CONTENT_COMMAND, undefined)}>
-               Outdent
-            </button>
-            <button onClick={() => editor.dispatchCommand(INDENT_CONTENT_COMMAND, undefined)}>
-               Indent
-            </button>
-         </div>
-      </div>
+      <ActionsContainer title="Align actions">
+         {['Left', 'Center', 'Right', 'Justify'].map((value) => {
+            return (
+               <ActionButton
+                  key={value}
+                  onClick={handleOnClick({
+                     formatType: value.toLowerCase() as ElementFormatType,
+                  })}
+               >
+                  {value}
+               </ActionButton>
+            );
+         })}
+         <ActionButton
+            onClick={() =>
+               editor.dispatchCommand(OUTDENT_CONTENT_COMMAND, undefined)
+            }
+         >
+            Outdent
+         </ActionButton>
+         <ActionButton
+            onClick={() =>
+               editor.dispatchCommand(INDENT_CONTENT_COMMAND, undefined)
+            }
+         >
+            Indent
+         </ActionButton>
+      </ActionsContainer>
    );
 };

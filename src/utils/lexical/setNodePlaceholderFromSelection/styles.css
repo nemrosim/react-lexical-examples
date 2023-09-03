@@ -1,0 +1,5 @@
+.node-placeholder:has(br):not(:has(span))::before {
+    position: absolute;
+    content: attr(data-placeholder);
+    color: rgba(136, 136, 136, 0.6);
+}
