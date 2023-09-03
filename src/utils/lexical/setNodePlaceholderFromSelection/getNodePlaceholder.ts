@@ -39,7 +39,7 @@ export const getNodePlaceholder = (lexicalNode: LexicalNode) => {
 
    if ($isParagraphNode(lexicalNode)) {
       // Like in https://www.notion.so/
-      placeholder += "Press '/' for command (... in progress) ";
+      placeholder = "Press '/' for command (... in progress)";
    }
 
    return placeholder;

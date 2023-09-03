@@ -1,5 +1,7 @@
 #root{
     overflow: hidden;
+    min-height: 100vh;
+    background-color: #f3f3f3;
 }
 
 /* disable error overlay screen */

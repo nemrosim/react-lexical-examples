@@ -109,27 +109,27 @@ export const App: React.FC = () => {
       onError: (e) => {
          console.log('ERROR:', e);
       },
-      // editorState: JSON.stringify(initialState),
+      editorState: JSON.stringify(initialState),
    };
 
    return (
       <div
          style={{
-            padding: '20px',
+            padding: '0px 20px',
          }}
       >
          <LexicalComposer initialConfig={lexicalConfig}>
             <div
                style={{
-                  margin: '20px 0px',
+                  marginBottom: '20px',
                }}
             >
-               {/*<CustomHistoryActions />*/}
-               {/*<CustomBannerActions />*/}
+               <CustomHistoryActions />
+               <CustomBannerActions />
                <CustomHeadingActions />
-               {/*<CustomTextActions />*/}
-               {/*<CustomAlignActions />*/}
-               {/*<MarkdownActions />*/}
+               <CustomTextActions />
+               <CustomAlignActions />
+               <MarkdownActions />
             </div>
             <RichTextPlugin
                contentEditable={CustomContent}

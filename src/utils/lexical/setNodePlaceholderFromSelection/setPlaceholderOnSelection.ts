@@ -7,7 +7,7 @@ import './styles.css';
 
 const PLACEHOLDER_CLASS_NAME = 'node-placeholder';
 
-const isHtmlHeadElement = (el: HTMLElement): el is HTMLHeadingElement => {
+const isHtmlHeadingElement = (el: HTMLElement): el is HTMLHeadingElement => {
    return el instanceof HTMLHeadingElement;
 };
 
@@ -26,13 +26,12 @@ export const setPlaceholderOnSelection = ({
    /**
     * 2. Remove "placeholder" class if it was added before
     */
-   children.forEach(({ htmlElement, node }) => {
+   children.forEach(({ htmlElement }) => {
       if (!htmlElement) {
          return;
       }
 
-      if (isHtmlHeadElement(htmlElement)) {
-         console.log('NODE', node);
+      if (isHtmlHeadingElement(htmlElement)) {
          return;
       }
 
@@ -52,7 +51,7 @@ export const setPlaceholderOnSelection = ({
    if (
       children.length === 1 &&
       children[0].htmlElement &&
-      !isHtmlHeadElement(children[0].htmlElement)
+      !isHtmlHeadingElement(children[0].htmlElement)
    ) {
       return;
    }

@@ -48,7 +48,7 @@ export const MarkdownActions = () => {
 
    return (
       <ActionsContainer title="Markdown action">
-         <ActionButton onClick={handleOnClick}>Markdown</ActionButton>
+         <ActionButton onClick={handleOnClick}>Markdown 🤦‍♂️</ActionButton>
       </ActionsContainer>
    );
 };

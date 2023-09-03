@@ -5,7 +5,9 @@ import { setNodePlaceholderFromSelection } from '../../utils/lexical';
 export const CustomOnChangePlugin = () => {
    const [editor] = useLexicalComposerContext();
    useEffect(() => {
-      return editor.registerUpdateListener(() => {
+      return editor.registerUpdateListener((listener) => {
+         const stateAsJSON = listener.editorState.toJSON();
+
          setNodePlaceholderFromSelection(editor);
       });
    }, [editor]);
