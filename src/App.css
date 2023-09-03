@@ -4,12 +4,6 @@
     background-color: #f3f3f3;
 }
 
-/* disable error overlay screen */
-/* https://stackoverflow.com/questions/46589819/disable-error-overlay-in-development-mode */
-iframe {
-    display: none;
-}
-
 .text-bold {
     font-weight: bold;
 }
@@ -68,4 +62,13 @@ iframe {
 
 p {
     margin: 0;
+}
+
+.embedBlock {
+    user-select: none;
+}
+.embedBlock_focus {
+    outline: 2px solid rgb(60, 132, 244);
+    border-radius: 1px;
+    background: #86accd;
 }

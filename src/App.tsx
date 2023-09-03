@@ -41,6 +41,10 @@ import { MATCHERS, validateUrl } from './utils';
 
 import initialState from './initialState.json';
 import './App.css';
+import { YouTubeActions } from './plugins/CustomYouTubePlugin/actions';
+import { YouTubePlugin } from './plugins/CustomYouTubePlugin';
+import { YouTubeNode } from './plugins/CustomYouTubePlugin/nodes';
+import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 
 export const App: React.FC = () => {
    const { isMarkdown } = useDraggableStore();
@@ -89,6 +93,7 @@ export const App: React.FC = () => {
          ListItemNode,
          LinkNode,
          AutoLinkNode,
+         YouTubeNode,
       ],
       editable: true,
       theme: {
@@ -105,11 +110,15 @@ export const App: React.FC = () => {
          },
          banner: 'banner',
          code: 'markdown-code',
+         embedBlock: {
+            base: 'embedBlock',
+            focus: 'embedBlock_focus',
+         },
       },
       onError: (e) => {
          console.log('ERROR:', e);
       },
-      editorState: JSON.stringify(initialState),
+      // editorState: JSON.stringify(initialState),
    };
 
    return (
@@ -124,6 +133,7 @@ export const App: React.FC = () => {
                   marginBottom: '20px',
                }}
             >
+               <YouTubeActions />
                <CustomHistoryActions />
                <CustomBannerActions />
                <CustomHeadingActions />
@@ -136,6 +146,7 @@ export const App: React.FC = () => {
                placeholder={CustomPlaceholder}
                ErrorBoundary={LexicalErrorBoundary}
             />
+            <YouTubePlugin />
             <HistoryPlugin />
             <CustomOnChangePlugin />
             {/* This will allow to wrap node with a pasted link*/}
