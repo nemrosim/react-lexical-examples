@@ -123,7 +123,7 @@ export const App: React.FC = () => {
       onError: (e) => {
          console.log('ERROR:', e);
       },
-      // editorState: JSON.stringify(initialState),
+      editorState: JSON.stringify(initialState),
    };
 
    return (
@@ -138,14 +138,14 @@ export const App: React.FC = () => {
                   marginBottom: '20px',
                }}
             >
-               {/*<YouTubeActions />*/}
+               <YouTubeActions />
                <DividerAction />
-               {/*<CustomHistoryActions />*/}
-               {/*<BannerAction />*/}
-               {/*<CustomHeadingActions />*/}
-               {/*<CustomTextActions />*/}
-               {/*<CustomAlignActions />*/}
-               {/*<MarkdownActions />*/}
+               <CustomHistoryActions />
+               <BannerAction />
+               <CustomHeadingActions />
+               <CustomTextActions />
+               <CustomAlignActions />
+               <MarkdownActions />
             </div>
             <RichTextPlugin
                contentEditable={CustomContent}
