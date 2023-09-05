@@ -1,4 +1,4 @@
-#root{
+#root {
     overflow: hidden;
     min-height: 100vh;
     background-color: #f3f3f3;
@@ -60,6 +60,11 @@
     display: block;
 }
 
+.divider {
+    /*margin-top: 44px;*/
+    /*margin-bottom: 34px;*/
+}
+
 p {
     margin: 0;
 }
@@ -67,6 +72,7 @@ p {
 .embedBlock {
     user-select: none;
 }
+
 .embedBlock_focus {
     outline: 2px solid rgb(60, 132, 244);
     border-radius: 1px;

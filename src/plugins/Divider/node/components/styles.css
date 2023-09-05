@@ -1,0 +1,27 @@
+hr {
+    margin-top: 44px;
+    margin-bottom: 34px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border: none;
+    display: block;
+    border: 0;
+    text-align: center;
+    overflow: visible;
+    font-size: 24px;
+    line-height: 1.4;
+    letter-spacing: .6em;
+}
+
+hr:before {
+    content: '...';
+    display: inline-block;
+    color: rgba(0,0,0,.68);
+    position: relative;
+    /*top: -30px;*/
+}
+
+.divider-selected {
+    outline: 2px solid rgb(60, 132, 244);
+    user-select: none;
+}

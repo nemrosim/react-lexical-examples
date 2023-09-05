@@ -1,12 +1,15 @@
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { $getSelection, $isRangeSelection, COMMAND_PRIORITY_NORMAL, createCommand } from 'lexical';
-import { $setBlocksType } from '@lexical/selection';
-import { BannerNode, $createBannerNode } from '../../nodes';
 import React from 'react';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import {
+   $getSelection,
+   $isRangeSelection,
+   COMMAND_PRIORITY_NORMAL,
+} from 'lexical';
+import { $setBlocksType } from '@lexical/selection';
+import { BannerNode, $createBannerNode } from './nodes';
+import { INSERT_BANNER_COMMAND } from './commands';
 
-export const INSERT_BANNER_COMMAND = createCommand('create_banner');
-
-export const CustomBannerPlugin: React.FC = () => {
+export const BannerPlugin: React.FC = () => {
    const [editor] = useLexicalComposerContext();
 
    if (!editor.hasNode(BannerNode)) {

@@ -14,23 +14,26 @@ import {
    CustomHistoryActions,
    CustomAlignActions,
    CustomHeadingActions,
-   CustomBannerActions,
    MarkdownActions,
+   DividerAction,
 } from './components';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { CodeNode } from '@lexical/code';
 import { ListItemNode, ListNode } from '@lexical/list';
-import { BannerNode, ImageNode } from './nodes';
+import { ImageNode } from './nodes';
 import {
+   BannerPlugin,
+   BannerAction,
+   BannerNode,
    CustomDraggableBlockPlugin,
    DraggableWrapper,
    useDraggableStore,
-   CustomBannerPlugin,
    CustomHeadingPlugin,
    // TODO
    CustomLexicalTypeaheadMenuPlugin,
    CustomOnChangePlugin,
-} from './plugins';
+   DividerPlugin,
+} from '@/plugins/index';
 
 // Link Plugins
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
@@ -44,7 +47,7 @@ import './App.css';
 import { YouTubeActions } from './plugins/CustomYouTubePlugin/actions';
 import { YouTubePlugin } from './plugins/CustomYouTubePlugin';
 import { YouTubeNode } from './plugins/CustomYouTubePlugin/nodes';
-import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
+import { DividerNode } from '@/plugins/Divider/node';
 
 export const App: React.FC = () => {
    const { isMarkdown } = useDraggableStore();
@@ -94,6 +97,7 @@ export const App: React.FC = () => {
          LinkNode,
          AutoLinkNode,
          YouTubeNode,
+         DividerNode,
       ],
       editable: true,
       theme: {
@@ -109,6 +113,7 @@ export const App: React.FC = () => {
             superscript: 'text-superscript',
          },
          banner: 'banner',
+         divider: 'divider',
          code: 'markdown-code',
          embedBlock: {
             base: 'embedBlock',
@@ -133,13 +138,14 @@ export const App: React.FC = () => {
                   marginBottom: '20px',
                }}
             >
-               <YouTubeActions />
-               <CustomHistoryActions />
-               <CustomBannerActions />
-               <CustomHeadingActions />
-               <CustomTextActions />
-               <CustomAlignActions />
-               <MarkdownActions />
+               {/*<YouTubeActions />*/}
+               <DividerAction />
+               {/*<CustomHistoryActions />*/}
+               {/*<BannerAction />*/}
+               {/*<CustomHeadingActions />*/}
+               {/*<CustomTextActions />*/}
+               {/*<CustomAlignActions />*/}
+               {/*<MarkdownActions />*/}
             </div>
             <RichTextPlugin
                contentEditable={CustomContent}
@@ -158,8 +164,9 @@ export const App: React.FC = () => {
             {/* TODO: This will show a popover dialog on "/" (like Notion)*/}
             {/*<CustomLexicalTypeaheadMenuPlugin />*/}
             <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+            <DividerPlugin />
             <CustomHeadingPlugin />
-            <CustomBannerPlugin />
+            <BannerPlugin />
             <CustomDraggableBlockPlugin />
          </LexicalComposer>
       </div>

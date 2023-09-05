@@ -1,10 +1,10 @@
 import React from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { INSERT_BANNER_COMMAND } from '../../plugins';
-import { ActionsContainer } from '../ActionsContainer';
-import { ActionButton } from '../ActionButton';
+import { INSERT_BANNER_COMMAND } from '../commands';
+import { ActionsContainer } from '@/components/ActionsContainer';
+import { ActionButton } from '@/components/ActionButton';
 
-export const CustomBannerActions: React.FC = () => {
+export const BannerAction: React.FC = () => {
    const [editor] = useLexicalComposerContext();
 
    const handleOnClick = () => {

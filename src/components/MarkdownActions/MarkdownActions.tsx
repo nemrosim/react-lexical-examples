@@ -7,12 +7,16 @@ import {
    $convertToMarkdownString,
 } from '@lexical/markdown';
 import { TRANSFORMERS } from '@lexical/markdown';
-import { draggableStore } from '../../plugins';
-import { BANNER_TRANSFORMER } from '../../nodes';
+import { draggableStore, BANNER_TRANSFORMER } from '../../plugins';
 import { ActionsContainer } from '../ActionsContainer';
 import { ActionButton } from '../ActionButton';
 
-export const APP_TRANSFORMERS = [...TRANSFORMERS, BANNER_TRANSFORMER];
+export const APP_TRANSFORMERS = [
+   ...TRANSFORMERS,
+   // TODO: Regex work in one line in lexical,
+   // so transformer works not as expected
+   BANNER_TRANSFORMER,
+];
 
 export const MarkdownActions = () => {
    const [editor] = useLexicalComposerContext();
