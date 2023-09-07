@@ -36,10 +36,12 @@ export const useOnDrop = () => {
                      const image = $createImageNode({
                         altText: 'File',
                         src: imageUrl,
-                        maxWidth: 300,
+                        // maxWidth: 300,
                      });
 
-                     const lineLexicalNode = $getNodeByKey(closestToLineElementKey);
+                     const lineLexicalNode = $getNodeByKey(
+                        closestToLineElementKey,
+                     );
                      lineLexicalNode?.insertAfter(image);
                   }
                }

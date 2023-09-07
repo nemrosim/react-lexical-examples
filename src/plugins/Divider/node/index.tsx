@@ -29,7 +29,6 @@ export class DividerNode extends DecoratorNode<JSX.Element> {
    }
 
    static importDOM(): DOMConversionMap | null {
-      console.log('IMPORT DOM');
       return {
          hr: () => ({
             conversion: convertDividerElement,

@@ -1,78 +1,23 @@
 import type {
    DOMConversionMap,
-   DOMConversionOutput,
    DOMExportOutput,
    EditorConfig,
    ElementFormatType,
    LexicalEditor,
-   LexicalNode,
    NodeKey,
-   Spread,
 } from 'lexical';
 
-import { BlockWithAlignableContents } from '@lexical/react/LexicalBlockWithAlignableContents';
 import {
    DecoratorBlockNode,
    SerializedDecoratorBlockNode,
 } from '@lexical/react/LexicalDecoratorBlockNode';
 import React, { JSX } from 'react';
+import { YouTubeComponent } from './components/YouTubeComponent';
+import { $createYouTubeNode, convertYoutubeElement } from './utils';
 
-interface YouTubeComponentProps {
-   className: Readonly<{
-      base: string;
-      focus: string;
-   }>;
-   format: ElementFormatType | null;
-   nodeKey: NodeKey;
+interface SerializedYouTubeNode extends SerializedDecoratorBlockNode {
    videoID: string;
 }
-
-const YouTubeComponent: React.FC<YouTubeComponentProps> = ({
-   className,
-   format,
-   nodeKey,
-   videoID,
-}: YouTubeComponentProps) => {
-   return (
-      <BlockWithAlignableContents
-         className={className}
-         format={format}
-         nodeKey={nodeKey}
-      >
-         <iframe
-            style={{
-               maxWidth: 560,
-               aspectRatio: '16 / 9',
-            }}
-            width="100%"
-            height="auto"
-            src={`https://www.youtube-nocookie.com/embed/${videoID}`}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen={true}
-            title="YouTube video"
-         />
-      </BlockWithAlignableContents>
-   );
-};
-
-export type SerializedYouTubeNode = Spread<
-   {
-      videoID: string;
-   },
-   SerializedDecoratorBlockNode
->;
-
-const convertYoutubeElement = (
-   domNode: HTMLElement,
-): null | DOMConversionOutput => {
-   const videoID = domNode.getAttribute('data-lexical-youtube');
-   if (videoID) {
-      const node = $createYouTubeNode(videoID);
-      return { node };
-   }
-   return null;
-};
 
 export class YouTubeNode extends DecoratorBlockNode {
    __id: string;
@@ -168,14 +113,4 @@ export class YouTubeNode extends DecoratorBlockNode {
          />
       );
    }
-}
-
-export function $createYouTubeNode(videoID: string): YouTubeNode {
-   return new YouTubeNode(videoID);
-}
-
-export function $isYouTubeNode(
-   node: YouTubeNode | LexicalNode | null | undefined,
-): node is YouTubeNode {
-   return node instanceof YouTubeNode;
 }

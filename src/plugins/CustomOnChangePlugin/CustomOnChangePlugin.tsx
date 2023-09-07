@@ -7,7 +7,7 @@ export const CustomOnChangePlugin = () => {
    useEffect(() => {
       return editor.registerUpdateListener((listener) => {
          const stateAsJSON = listener.editorState.toJSON();
-
+         console.log('CURRENT STATE', stateAsJSON);
          setNodePlaceholderFromSelection(editor);
       });
    }, [editor]);

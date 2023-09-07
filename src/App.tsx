@@ -33,6 +33,11 @@ import {
    CustomLexicalTypeaheadMenuPlugin,
    CustomOnChangePlugin,
    DividerPlugin,
+   YouTubePlugin,
+   YouTubeActions,
+   YouTubeNode,
+   MentionsPlugin,
+   MentionNode,
 } from '@/plugins/index';
 
 // Link Plugins
@@ -43,11 +48,12 @@ import LexicalClickableLinkPlugin from '@lexical/react/LexicalClickableLinkPlugi
 import { MATCHERS, validateUrl } from './utils';
 
 import initialState from './initialState.json';
+import workInProgressState from './workInProgressState.json';
 import './App.css';
-import { YouTubeActions } from './plugins/CustomYouTubePlugin/actions';
-import { YouTubePlugin } from './plugins/CustomYouTubePlugin';
-import { YouTubeNode } from './plugins/CustomYouTubePlugin/nodes';
 import { DividerNode } from '@/plugins/Divider/node';
+import { ImageWithCaptionPlugin } from '@/plugins/ImageWithCaptionPlugin/ImageWithCaptionPlugin';
+import { ImageWithCaptionNode } from '@/plugins/ImageWithCaptionPlugin/nodes/ImageWithCaptionNode';
+import { ImageWithCaptionAction } from '@/plugins/ImageWithCaptionPlugin/actions';
 
 export const App: React.FC = () => {
    const { isMarkdown } = useDraggableStore();
@@ -98,6 +104,8 @@ export const App: React.FC = () => {
          AutoLinkNode,
          YouTubeNode,
          DividerNode,
+         MentionNode,
+         ImageWithCaptionNode,
       ],
       editable: true,
       theme: {
@@ -112,6 +120,16 @@ export const App: React.FC = () => {
             subscript: 'text-subscript',
             superscript: 'text-superscript',
          },
+         image: 'h-auto max-w-full',
+         // Tailwind + Flowbite: https://flowbite.com/docs/typography/headings/#heading-one-h1
+         heading: {
+            h1: 'mb-5 text-5xl font-extrabold',
+            h2: 'mb-4 text-4xl font-bold',
+            h3: 'mb-3 text-3xl font-bold',
+            h4: 'mb-2 text-2xl font-bold',
+            h5: 'mb-1 text-xl font-bold',
+         },
+         paragraph: 'mb-3',
          banner: 'banner',
          divider: 'divider',
          code: 'markdown-code',
@@ -124,6 +142,7 @@ export const App: React.FC = () => {
          console.log('ERROR:', e);
       },
       editorState: JSON.stringify(initialState),
+      // editorState: JSON.stringify(workInProgressState),
    };
 
    return (
@@ -140,6 +159,7 @@ export const App: React.FC = () => {
             >
                <YouTubeActions />
                <DividerAction />
+               <ImageWithCaptionAction />
                <CustomHistoryActions />
                <BannerAction />
                <CustomHeadingActions />
@@ -163,7 +183,10 @@ export const App: React.FC = () => {
             <LexicalClickableLinkPlugin />
             {/* TODO: This will show a popover dialog on "/" (like Notion)*/}
             {/*<CustomLexicalTypeaheadMenuPlugin />*/}
+            <ImageWithCaptionPlugin />
             <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+            {/* This will allow to get data by "@" */}
+            <MentionsPlugin />
             <DividerPlugin />
             <CustomHeadingPlugin />
             <BannerPlugin />

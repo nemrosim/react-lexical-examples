@@ -18,6 +18,7 @@ hr:before {
     display: inline-block;
     color: rgba(0,0,0,.68);
     position: relative;
+    pointer-events: none;
     /*top: -30px;*/
 }
 
