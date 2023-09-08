@@ -29,16 +29,12 @@ export const MarkdownActions = () => {
             $isCodeNode(firstChild) &&
             firstChild.getLanguage() === 'markdown'
          ) {
-            // console.log('Markdown -> Node');
-
             $convertFromMarkdownString(
                firstChild.getTextContent(),
                APP_TRANSFORMERS,
             );
             draggableStore.getState().setIsMarkdown(false);
          } else {
-            // console.log('Node -> Markdown');
-
             const markdown = $convertToMarkdownString(APP_TRANSFORMERS);
             root
                .clear()

@@ -10,6 +10,7 @@ import {
    KEY_DELETE_COMMAND,
    KEY_ENTER_COMMAND,
    LexicalEditor,
+   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { $isImageWithCaptionNode } from '@/plugins/ImageWithCaptionPlugin/nodes/ImageWithCaptionNode';
@@ -26,46 +27,42 @@ export const useImageNodeHandlers = ({
 
    const [editor] = useLexicalComposerContext();
 
-   const onDelete = useCallback(
-      (payload: KeyboardEvent) => {
-         console.log('DELETE 1');
-         if ($isNodeSelection($getSelection())) {
-            console.log('DELETE 2');
+   // const onDelete = useCallback(
+   //    (payload: KeyboardEvent) => {
+   //       if ($isNodeSelection($getSelection())) {
+   //          const event: KeyboardEvent = payload;
+   //          event.preventDefault();
+   //          const node = $getNodeByKey(lexicalNodeKey);
+   //          if ($isImageWithCaptionNode(node)) {
+   //             node.remove();
+   //          }
+   //       }
+   //       return false;
+   //    },
+   //    [lexicalNodeKey],
+   // );
 
-            const event: KeyboardEvent = payload;
-            event.preventDefault();
-            const node = $getNodeByKey(lexicalNodeKey);
-            if ($isImageWithCaptionNode(node)) {
-               node.remove();
-            }
-         }
-         return false;
-      },
-      [lexicalNodeKey],
-   );
-
-   const onEscape = useCallback(
-      (event: KeyboardEvent) => {
-         if (activeEditorRef.current === caption) {
-            $setSelection(null);
-            editor.update(() => {
-               setSelected(true);
-               const parentRootElement = editor.getRootElement();
-               if (parentRootElement !== null) {
-                  parentRootElement.focus();
-               }
-            });
-            return true;
-         }
-         return false;
-      },
-      [caption, editor, setSelected],
-   );
+   // const onEscape = useCallback(
+   //    (event: KeyboardEvent) => {
+   //       if (activeEditorRef.current === caption) {
+   //          $setSelection(null);
+   //          editor.update(() => {
+   //             setSelected(true);
+   //             const parentRootElement = editor.getRootElement();
+   //             if (parentRootElement !== null) {
+   //                parentRootElement.focus();
+   //             }
+   //          });
+   //          return true;
+   //       }
+   //       return false;
+   //    },
+   //    [caption, editor, setSelected],
+   // );
 
    const onEnter = useCallback(
       (event: KeyboardEvent) => {
          const latestSelection = $getSelection();
-         console.log('ON ENTER');
          if (
             isSelected &&
             $isNodeSelection(latestSelection) &&
@@ -84,6 +81,19 @@ export const useImageNodeHandlers = ({
 
    useEffect(() => {
       return mergeRegister(
+         /**
+          * This is required for root lexical state
+          * Without this your changes will not be stored in a JSON format
+          */
+         // editor.registerCommand(
+         //    SELECTION_CHANGE_COMMAND,
+         //    (_, activeEditor) => {
+         //       console.log('ACTIVE EDITOR', activeEditor);
+         //       activeEditorRef.current = activeEditor;
+         //       return false;
+         //    },
+         //    COMMAND_PRIORITY_LOW,
+         // ),
          editor.registerCommand(
             KEY_ENTER_COMMAND,
             onEnter,
@@ -100,18 +110,24 @@ export const useImageNodeHandlers = ({
             },
             COMMAND_PRIORITY_LOW,
          ),
-         editor.registerCommand(
-            KEY_DELETE_COMMAND,
-            onDelete,
-            COMMAND_PRIORITY_LOW,
-         ),
-         editor.registerCommand(
-            KEY_BACKSPACE_COMMAND,
-            onDelete,
-            COMMAND_PRIORITY_LOW,
-         ),
+         // editor.registerCommand(
+         //    KEY_DELETE_COMMAND,
+         //    onDelete,
+         //    COMMAND_PRIORITY_LOW,
+         // ),
+         // editor.registerCommand(
+         //    KEY_BACKSPACE_COMMAND,
+         //    onDelete,
+         //    COMMAND_PRIORITY_LOW,
+         // ),
       );
-   }, [editor, isSelected, lexicalNodeKey, onDelete, onEnter]);
+   }, [
+      editor,
+      isSelected,
+      lexicalNodeKey,
+      // onDelete,
+      onEnter,
+   ]);
 
    return {
       isSelected,

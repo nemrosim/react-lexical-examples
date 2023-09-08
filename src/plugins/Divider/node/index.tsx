@@ -19,8 +19,6 @@ export class DividerNode extends DecoratorNode<JSX.Element> {
    }
 
    static clone(node: DividerNode): DividerNode {
-      console.log('[DIVIDER] CLONE');
-
       return new DividerNode(node.__key);
    }
 
@@ -67,7 +65,6 @@ export class DividerNode extends DecoratorNode<JSX.Element> {
    }
 
    decorate(): JSX.Element {
-      console.log('DECORATE DIVIDER');
       return <Divider nodeKey={this.__key} />;
    }
 }

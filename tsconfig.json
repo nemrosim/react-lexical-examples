@@ -26,6 +26,12 @@
       ],
       "@/plugins/*": [
         "plugins/*"
+      ],
+      "@/utils/*": [
+        "utils/*"
+      ],
+      "@/nodes/*": [
+        "nodes/*"
       ]
     }
   },

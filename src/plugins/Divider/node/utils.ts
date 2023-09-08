@@ -11,7 +11,6 @@ export const convertDividerElement = (): DOMConversionOutput => {
 
 export function $createDividerNode(): DividerNode {
    const divider = new DividerNode();
-   console.log('DIVIDER', divider);
    return $applyNodeReplacement(divider);
 }
 
