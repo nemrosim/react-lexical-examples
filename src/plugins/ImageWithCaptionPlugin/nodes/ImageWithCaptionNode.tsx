@@ -20,37 +20,40 @@ const NODE_TYPE = 'ImageWithCaptionNode';
 export interface SerializedImageWithCaptionNode
    extends SerializedDecoratorBlockNode {
    caption: SerializedEditor;
+   src: string;
 }
 
 export class ImageWithCaptionNode extends DecoratorNode<JSX.Element> {
    __caption: LexicalEditor;
+   __src: string;
 
-   constructor(props?: { key?: NodeKey; caption?: LexicalEditor }) {
-      console.log('[ImageWithCaptionNode] 1. CONSTRUCTOR', props);
+   constructor(props?: {
+      key?: NodeKey;
+      caption?: LexicalEditor;
+      src?: string;
+   }) {
       super(props?.key);
       this.__caption = props?.caption || createEditor();
+      this.__src = props?.src || 'https://placehold.co/600x400';
    }
 
    static getType(): string {
-      console.log('[ImageWithCaptionNode] 1. getType');
-
       return NODE_TYPE;
    }
 
    static clone(node: ImageWithCaptionNode): ImageWithCaptionNode {
-      console.log('[ImageWithCaptionNode]. clone');
       return new ImageWithCaptionNode({
          key: node.__key,
          caption: node.__caption,
+         src: node.__src,
       });
    }
 
    // This will be used for JSON export
    exportJSON(): SerializedImageWithCaptionNode {
-      console.log('[ImageWithCaptionNode]. exportJSON');
-
       return {
          format: this.__format,
+         src: this.__src,
          caption: this.__caption.toJSON(),
          type: NODE_TYPE,
          version: 1,
@@ -61,10 +64,8 @@ export class ImageWithCaptionNode extends DecoratorNode<JSX.Element> {
    static importJSON(
       serializedNode: SerializedImageWithCaptionNode,
    ): ImageWithCaptionNode {
-      console.log('[ImageWithCaptionNode]. importJSON');
-
-      const { caption } = serializedNode;
-      const node = $createImageWithCaptionNode();
+      const { caption, src } = serializedNode;
+      const node = $createImageWithCaptionNode({ src });
 
       const nestedEditor = node.__caption;
       const editorState = nestedEditor.parseEditorState(caption.editorState);
@@ -75,12 +76,11 @@ export class ImageWithCaptionNode extends DecoratorNode<JSX.Element> {
       return node;
    }
 
-   // Will be called on app start
-   static importDOM(): DOMConversionMap | null {
-      console.log('[ImageWithCaptionNode]. importDOM');
-
-      return null;
-   }
+   // TODO: Will be called on app start. Implement later
+   // static importDOM(): DOMConversionMap | null {
+   //    // convertDOMNodeIntoSomething
+   //    return null;
+   // }
 
    createDOM(config: EditorConfig): HTMLElement {
       const htmlElement = document.createElement('div');
@@ -92,10 +92,10 @@ export class ImageWithCaptionNode extends DecoratorNode<JSX.Element> {
    }
 
    decorate(_editor: LexicalEditor, config: EditorConfig): JSX.Element {
-      console.log('DECORATE', this.__caption.getEditorState().toJSON());
       return (
          <ImageWithCaption
             lexicalNodeKey={this.__key}
+            src={this.__src}
             caption={this.__caption}
          />
       );
@@ -105,7 +105,6 @@ export class ImageWithCaptionNode extends DecoratorNode<JSX.Element> {
 function convertDOMNodeIntoSomething(
    domNode: Node,
 ): null | DOMConversionOutput {
-   console.log('CONVERT DOM', domNode);
    if (domNode instanceof HTMLImageElement) {
       const node = $createImageWithCaptionNode();
       return { node };
@@ -113,8 +112,10 @@ function convertDOMNodeIntoSomething(
    return null;
 }
 
-export function $createImageWithCaptionNode(): ImageWithCaptionNode {
-   return new ImageWithCaptionNode();
+export function $createImageWithCaptionNode(props?: {
+   src: string;
+}): ImageWithCaptionNode {
+   return new ImageWithCaptionNode({ src: props?.src });
 }
 
 export function $isImageWithCaptionNode(

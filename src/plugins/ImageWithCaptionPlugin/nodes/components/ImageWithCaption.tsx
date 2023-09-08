@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId, useRef, useState } from 'react';
 import {
    $createParagraphNode,
    $createTextNode,
@@ -14,32 +14,51 @@ import { useImageNodeHandlers } from '@/plugins/ImageWithCaptionPlugin/nodes/com
 import { PlainTextPlugin } from '@lexical/react/LexicalPlainTextPlugin';
 import toast from 'react-hot-toast';
 
-import './styles.css';
 import { useSharedHistoryContext } from '../../../../context/SharedHistoryContext';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
+import {
+   autoUpdate,
+   flip,
+   FloatingFocusManager,
+   offset,
+   shift,
+   useClick,
+   useDismiss,
+   useFloating,
+   useInteractions,
+   useRole,
+} from '@floating-ui/react';
+import './styles.css';
+import { usePopover } from '@/plugins/ImageWithCaptionPlugin/nodes/components/hooks/usePopover/usePopover';
 
 export interface ImageWithCaptionProps {
    lexicalNodeKey: string;
+   src: string;
    caption: LexicalEditor;
 }
 
 export const ImageWithCaption: React.FC<ImageWithCaptionProps> = (props) => {
+   const { Popover, setPopoverReference, popoverReferenceProps } = usePopover();
+
+   const imageRef = useRef<HTMLImageElement | null>(null);
    const { historyState } = useSharedHistoryContext();
 
-   const { isSelected } = useImageNodeHandlers(props);
-
-   console.log(
-      '[ImageWithCaption] editor state',
-      props.caption.getEditorState().toJSON(),
-   );
+   const { isSelected } = useImageNodeHandlers({ ...props, imageRef });
 
    return (
-      <figure className="max-w-lg" style={{}}>
+      <figure className="max-w-lg">
          <img
-            className="h-auto max-w-full rounded-lg"
-            src="https://placehold.co/600x400"
+            tabIndex={0} // tab index is required for focus effect trigger
+            ref={(ref) => {
+               imageRef.current = ref;
+               setPopoverReference(ref);
+            }}
+            {...popoverReferenceProps}
+            src={props.src}
+            className="h-auto max-w-full rounded-lg focus:outline-none focus:ring focus:ring-violet-300"
             alt="image description"
          />
+         {Popover}
          <figcaption className="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">
             <LexicalNestedComposer
                initialEditor={props.caption}
@@ -50,17 +69,10 @@ export const ImageWithCaption: React.FC<ImageWithCaptionProps> = (props) => {
                <HistoryPlugin externalHistoryState={historyState} />
                <OnChangePlugin
                   onChange={(editorState, editor, tags) => {
-                     editor.update(() => {
+                     editor.update(function restrictLineLengthAndNoNewLine() {
                         const newlinesRegex = /[\n\r]/;
 
                         const prevTexContent = $getRoot().getTextContent();
-
-                        console.log('>>>>>>>>> TEXT', `${prevTexContent}`);
-
-                        console.log(
-                           '>>>>>>>>>>>>>> IS',
-                           prevTexContent?.includes('\r'),
-                        );
 
                         if (
                            prevTexContent &&
@@ -72,7 +84,6 @@ export const ImageWithCaption: React.FC<ImageWithCaptionProps> = (props) => {
                               '',
                            );
 
-                           // replace current content
                            const paragraph = $createParagraphNode();
                            paragraph.append(
                               $createTextNode(

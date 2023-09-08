@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
    $getNodeByKey,
    $getSelection,
@@ -17,10 +17,15 @@ import { $isImageWithCaptionNode } from '@/plugins/ImageWithCaptionPlugin/nodes/
 import { ImageWithCaptionProps } from '@/plugins/ImageWithCaptionPlugin/nodes/components';
 import { mergeRegister } from '@lexical/utils';
 
+interface UseImageNodeHandlersProps extends ImageWithCaptionProps {
+   imageRef: React.RefObject<HTMLImageElement>;
+}
+
 export const useImageNodeHandlers = ({
    lexicalNodeKey,
    caption,
-}: ImageWithCaptionProps) => {
+   imageRef,
+}: UseImageNodeHandlersProps) => {
    const [isSelected, setSelected] = useState(false);
 
    const activeEditorRef = useRef<LexicalEditor | null>(null);
@@ -63,6 +68,7 @@ export const useImageNodeHandlers = ({
    const onEnter = useCallback(
       (event: KeyboardEvent) => {
          const latestSelection = $getSelection();
+         console.log('ENTER');
          if (
             isSelected &&
             $isNodeSelection(latestSelection) &&
@@ -80,20 +86,19 @@ export const useImageNodeHandlers = ({
    );
 
    useEffect(() => {
-      return mergeRegister(
+      const unregister = mergeRegister(
          /**
           * This is required for root lexical state
           * Without this your changes will not be stored in a JSON format
           */
-         // editor.registerCommand(
-         //    SELECTION_CHANGE_COMMAND,
-         //    (_, activeEditor) => {
-         //       console.log('ACTIVE EDITOR', activeEditor);
-         //       activeEditorRef.current = activeEditor;
-         //       return false;
-         //    },
-         //    COMMAND_PRIORITY_LOW,
-         // ),
+         editor.registerCommand(
+            SELECTION_CHANGE_COMMAND,
+            (_, activeEditor) => {
+               // activeEditorRef.current = activeEditor;
+               return false;
+            },
+            COMMAND_PRIORITY_LOW,
+         ),
          editor.registerCommand(
             KEY_ENTER_COMMAND,
             onEnter,
@@ -103,7 +108,14 @@ export const useImageNodeHandlers = ({
          editor.registerCommand(
             CLICK_COMMAND,
             (event: MouseEvent) => {
-               const hrElem = editor.getElementByKey(lexicalNodeKey);
+               console.log('>>> EVENT', event.target);
+               console.log('>>> REF', imageRef.current);
+               // const hrElem = editor.getElementByKey(lexicalNodeKey);
+
+               if (event.target === imageRef.current) {
+                  console.log('HELLO');
+                  imageRef.current?.focus();
+               }
 
                setSelected(!isSelected);
                return true;
@@ -121,13 +133,11 @@ export const useImageNodeHandlers = ({
          //    COMMAND_PRIORITY_LOW,
          // ),
       );
-   }, [
-      editor,
-      isSelected,
-      lexicalNodeKey,
-      // onDelete,
-      onEnter,
-   ]);
+
+      return () => {
+         unregister();
+      };
+   }, [editor, imageRef, isSelected, lexicalNodeKey, onEnter]);
 
    return {
       isSelected,
