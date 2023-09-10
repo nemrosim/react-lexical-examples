@@ -140,8 +140,8 @@ export const LexicalEditor: React.FC<PropsWithChildren> = ({ children }) => {
       onError: (e) => {
          console.log('ERROR:', e);
       },
-      // editorState: JSON.stringify(initialState),
-      editorState: JSON.stringify(workInProgressState),
+      editorState: JSON.stringify(initialState),
+      // editorState: JSON.stringify(workInProgressState),
    };
 
    return (
@@ -157,15 +157,15 @@ export const LexicalEditor: React.FC<PropsWithChildren> = ({ children }) => {
                   marginBottom: '20px',
                }}
             >
-               {/*<YouTubeActions />*/}
-               {/*<DividerAction />*/}
+               <YouTubeActions />
+               <DividerAction />
                <ImageWithCaptionAction />
-               {/*<CustomHistoryActions />*/}
-               {/*<BannerAction />*/}
-               {/*<CustomHeadingActions />*/}
-               {/*<CustomTextActions />*/}
-               {/*<CustomAlignActions />*/}
-               {/*<MarkdownActions />*/}
+               <CustomHistoryActions />
+               <BannerAction />
+               <CustomHeadingActions />
+               <CustomTextActions />
+               <CustomAlignActions />
+               <MarkdownActions />
             </div>
             <RichTextPlugin
                contentEditable={CustomContent}

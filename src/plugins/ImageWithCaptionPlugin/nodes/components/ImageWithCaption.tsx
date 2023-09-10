@@ -1,9 +1,8 @@
-import React, { useId, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import {
    $createParagraphNode,
    $createTextNode,
    $getRoot,
-   $getSelection,
    LexicalEditor,
 } from 'lexical';
 import { LexicalNestedComposer } from '@lexical/react/LexicalNestedComposer';
@@ -16,20 +15,8 @@ import toast from 'react-hot-toast';
 
 import { useSharedHistoryContext } from '../../../../context/SharedHistoryContext';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
-import {
-   autoUpdate,
-   flip,
-   FloatingFocusManager,
-   offset,
-   shift,
-   useClick,
-   useDismiss,
-   useFloating,
-   useInteractions,
-   useRole,
-} from '@floating-ui/react';
-import './styles.css';
 import { usePopover } from '@/plugins/ImageWithCaptionPlugin/nodes/components/hooks/usePopover/usePopover';
+import './styles.css';
 
 export interface ImageWithCaptionProps {
    lexicalNodeKey: string;
@@ -38,7 +25,8 @@ export interface ImageWithCaptionProps {
 }
 
 export const ImageWithCaption: React.FC<ImageWithCaptionProps> = (props) => {
-   const { Popover, setPopoverReference, popoverReferenceProps } = usePopover();
+   const { Popover, setPopoverReference, popoverReferenceProps } =
+      usePopover(props);
 
    const imageRef = useRef<HTMLImageElement | null>(null);
    const { historyState } = useSharedHistoryContext();
@@ -46,7 +34,7 @@ export const ImageWithCaption: React.FC<ImageWithCaptionProps> = (props) => {
    const { isSelected } = useImageNodeHandlers({ ...props, imageRef });
 
    return (
-      <figure className="max-w-lg">
+      <figure className="max-w-lg mb-6">
          <img
             tabIndex={0} // tab index is required for focus effect trigger
             ref={(ref) => {

@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import React, { PropsWithChildren, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useModalContext } from '@/components/Modal/context';
 import toast from 'react-hot-toast';
 

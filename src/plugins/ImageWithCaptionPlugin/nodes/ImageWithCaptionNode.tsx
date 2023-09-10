@@ -1,10 +1,8 @@
 import {
    createEditor,
    DecoratorNode,
-   DOMConversionMap,
    DOMConversionOutput,
    EditorConfig,
-   ElementFormatType,
    LexicalEditor,
    LexicalNode,
    NodeKey,
@@ -13,7 +11,6 @@ import {
 import { JSX } from 'react';
 import { ImageWithCaption } from '@/plugins/ImageWithCaptionPlugin/nodes/components';
 import { SerializedDecoratorBlockNode } from '@lexical/react/LexicalDecoratorBlockNode';
-import { $createImageNode } from '../../../nodes';
 
 const NODE_TYPE = 'ImageWithCaptionNode';
 
@@ -74,6 +71,11 @@ export class ImageWithCaptionNode extends DecoratorNode<JSX.Element> {
       }
 
       return node;
+   }
+
+   setImageSrc(src: string) {
+      const writable = this.getWritable();
+      writable.__src = src;
    }
 
    // TODO: Will be called on app start. Implement later
