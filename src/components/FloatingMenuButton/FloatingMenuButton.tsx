@@ -59,7 +59,7 @@ export const FloatingMenuButton = () => {
 
    return (
       <>
-         <div className="fixed bottom-6 right-6 group">
+         <div className="fixed z-20 bottom-6 right-6 group">
             <button
                type="button"
                onClick={() =>
@@ -77,7 +77,7 @@ export const FloatingMenuButton = () => {
                <span className="sr-only">Open actions menu</span>
             </button>
          </div>
-         <div className="fixed bottom-6 right-24 group">
+         <div className="fixed z-20 bottom-6 right-24 group">
             <button
                type="button"
                onClick={() =>

@@ -40,11 +40,14 @@ export const Modal: React.FC = () => {
       <div
          id="modal"
          onClick={closeModal}
+         onScroll={() => {
+            console.log('SCROLL');
+         }}
          style={{
             top: 0,
             left: 0,
             zIndex: 100,
-            position: 'absolute',
+            position: 'fixed',
             width: '100%',
             height: '100%',
             backgroundColor: 'rgba(0,0,0,0.4)',
@@ -60,8 +63,8 @@ export const Modal: React.FC = () => {
                zIndex: 101,
                backgroundColor: 'whitesmoke',
                padding: '8px',
-               width: '80%',
-               height: '80%',
+               width: '90%',
+               height: '90%',
                overflow: 'auto',
             }}
          >
