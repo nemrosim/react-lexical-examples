@@ -9,14 +9,15 @@ import { LexicalNestedComposer } from '@lexical/react/LexicalNestedComposer';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
-import { useImageNodeHandlers } from '@/plugins/ImageWithCaptionPlugin/nodes/components/hooks';
+import { useImageNodeHandlers } from 'plugins/ImageWithCaptionPlugin/nodes/components/ImageWithCaption/hooks';
 import { PlainTextPlugin } from '@lexical/react/LexicalPlainTextPlugin';
 import toast from 'react-hot-toast';
 
-import { useSharedHistoryContext } from '../../../../context/SharedHistoryContext';
+import { useSharedHistoryContext } from '../../../../../context/SharedHistoryContext';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
-import { usePopover } from '@/plugins/ImageWithCaptionPlugin/nodes/components/hooks/usePopover/usePopover';
-import './styles.css';
+import { usePopover } from '@/plugins/ImageWithCaptionPlugin/nodes/components/ImageWithCaption/hooks/usePopover/usePopover';
+import './components/styles.css';
+import { OverlayMenuIcons } from '@/plugins/ImageWithCaptionPlugin/nodes/components/ImageWithCaption/components';
 
 export interface ImageWithCaptionProps {
    lexicalNodeKey: string;
@@ -34,18 +35,32 @@ export const ImageWithCaption: React.FC<ImageWithCaptionProps> = (props) => {
    const { isSelected } = useImageNodeHandlers({ ...props, imageRef });
 
    return (
-      <figure className="max-w-lg mb-6">
-         <img
-            tabIndex={0} // tab index is required for focus effect trigger
-            ref={(ref) => {
-               imageRef.current = ref;
-               setPopoverReference(ref);
-            }}
-            {...popoverReferenceProps}
-            src={props.src}
-            className="h-auto max-w-full rounded-lg focus:outline-none focus:ring focus:ring-violet-300"
-            alt="image description"
-         />
+      <figure
+         className="max-w-lg mb-6"
+         onMouseEnter={() => {
+            console.log('ENTER');
+         }}
+         onMouseDown={() => {
+            console.log('DOWN');
+         }}
+         onMouseOver={() => {
+            console.log('OVER');
+         }}
+      >
+         <div style={{ position: 'relative' }}>
+            <img
+               tabIndex={0} // tab index is required for focus effect trigger
+               ref={(ref) => {
+                  imageRef.current = ref;
+                  setPopoverReference(ref);
+               }}
+               {...popoverReferenceProps}
+               src={props.src}
+               className="h-auto max-w-full rounded-lg focus:outline-none focus:ring focus:ring-violet-300"
+               alt="image description"
+            />
+            <OverlayMenuIcons {...props} />
+         </div>
          {Popover}
          <figcaption className="mt-2 text-sm text-center text-gray-500 dark:text-gray-400">
             <LexicalNestedComposer

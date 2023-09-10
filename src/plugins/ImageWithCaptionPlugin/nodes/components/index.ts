@@ -1,1 +1,1 @@
-export * from './ImageWithCaption';
+export * from './ImageWithCaption/ImageWithCaption';

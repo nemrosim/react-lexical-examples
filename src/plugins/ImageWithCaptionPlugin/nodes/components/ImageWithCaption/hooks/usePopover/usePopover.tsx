@@ -11,7 +11,7 @@ import {
 } from '@floating-ui/react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PopoverInput } from '@/plugins/ImageWithCaptionPlugin/nodes/components/hooks/usePopover/components';
+import { PopoverInput } from '@/plugins/ImageWithCaptionPlugin/nodes/components/ImageWithCaption/hooks/usePopover/components';
 import { ImageWithCaptionProps } from '@/plugins/ImageWithCaptionPlugin/nodes/components';
 
 const useLexicalStateUpdate = () => {

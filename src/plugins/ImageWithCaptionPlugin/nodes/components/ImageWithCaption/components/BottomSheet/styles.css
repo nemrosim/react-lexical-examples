@@ -1,0 +1,6 @@
+[data-rsbs-header] {
+    padding: 0;
+}
+[data-rsbs-header]:before {
+    display: none;
+}

@@ -3,6 +3,7 @@ import {
    DecoratorNode,
    DOMConversionOutput,
    EditorConfig,
+   ElementNode,
    LexicalEditor,
    LexicalNode,
    NodeKey,
@@ -116,8 +117,28 @@ function convertDOMNodeIntoSomething(
 
 export function $createImageWithCaptionNode(props?: {
    src: string;
+   caption?: LexicalEditor;
 }): ImageWithCaptionNode {
-   return new ImageWithCaptionNode({ src: props?.src });
+   if (!props?.caption) {
+      return new ImageWithCaptionNode({
+         src: props?.src,
+      });
+   }
+
+   // NOTE: When you will try to clone existing editor we will need to create a new one
+   // Without this we will just pass a reference to the previous editor
+   const newEditor = createEditor();
+   const editorState = newEditor.parseEditorState(
+      props.caption.getEditorState().toJSON(),
+   );
+   if (!editorState.isEmpty()) {
+      newEditor.setEditorState(editorState);
+   }
+
+   return new ImageWithCaptionNode({
+      src: props?.src,
+      caption: newEditor,
+   });
 }
 
 export function $isImageWithCaptionNode(
