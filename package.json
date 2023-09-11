@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.25.4",
-    "@lexical/react": "^0.12.0",
+    "@lexical/react": "^0.12.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -20,7 +20,7 @@
     "@types/react-dom": "^18.2.7",
     "@types/validator": "^13.11.1",
     "framer-motion": "^10.16.4",
-    "lexical": "^0.12.0",
+    "lexical": "^0.12.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.46.1",
